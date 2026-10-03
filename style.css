@@ -18,6 +18,7 @@
   --text:#f6f5fb;
   --text-2:#c7c4dc;
   --muted:#8b87a3;
+
   --rose:#ff4d8d;
   --rose-strong:#ff2f76;
   --violet:#8b6cf9;
@@ -26,27 +27,34 @@
   --mint:#34e7b5;
   --amber:#ffb84d;
   --red:#ff5c5c;
+
   --accent-grad:linear-gradient(120deg,var(--rose),var(--violet));
   --glow-rose:rgba(255,77,141,.35);
   --glow-violet:rgba(139,108,249,.28);
+
   --shadow-lg:0 30px 80px rgba(0,0,0,.55);
   --shadow-md:0 14px 40px rgba(0,0,0,.4);
   --shadow-sm:0 6px 18px rgba(0,0,0,.3);
+
   --radius-lg:22px;
   --radius-md:16px;
   --radius-sm:11px;
   --radius-pill:999px;
+
   --blur-sm:14px;
   --blur-md:26px;
   --blur-lg:44px;
+
   --ease:cubic-bezier(.19,1,.22,1);
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
   --dur-fast:150ms;
   --dur:280ms;
   --dur-slow:520ms;
+
   --font-display:'Fraunces',ui-serif,Georgia,serif;
   --font-body:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
   --font-mono:'JetBrains Mono',ui-monospace,monospace;
+
   --bot-image:url('https://files.catbox.moe/xmirqx.jpg');
   color-scheme: dark;
 }
@@ -62,12 +70,15 @@
   --text:#161228;
   --text-2:#4c4665;
   --muted:#847e9e;
+
   --rose:#e02e73;
   --rose-strong:#c91f61;
   --violet:#6a3fe0;
   --violet-strong:#5c2fe0;
+
   --glow-rose:rgba(224,46,115,.18);
   --glow-violet:rgba(106,63,224,.15);
+
   --shadow-lg:0 30px 70px rgba(30,20,50,.14);
   --shadow-md:0 14px 34px rgba(30,20,50,.1);
   --shadow-sm:0 6px 16px rgba(30,20,50,.08);
@@ -94,6 +105,9 @@ button{cursor:pointer}
 a{color:inherit}
 ul{list-style:none}
 
+/* ---------- Cinematic background system ----------
+   bot photo -> heavy blur -> dark/luxury treatment -> gradient overlay -> bloom
+*/
 body::before{
   content:'';
   position:fixed;
@@ -128,10 +142,14 @@ body::after{
     radial-gradient(at 88% 78%, var(--glow-violet) 0%, transparent 46%),
     linear-gradient(180deg, rgba(255,255,255,.35) 0%, var(--bg) 78%);
 }
+
+/* Subtle grain so glass surfaces don't look flat/banded */
 .grain{
   position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* ---------- Utility ---------- */
 .container{max-width:1220px;margin:0 auto;padding:0 24px}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip-link{
@@ -140,6 +158,7 @@ body::after{
   font-weight:600;font-size:13px;transition:top var(--dur-fast) var(--ease);
 }
 .skip-link:focus{top:16px}
+
 .glass{
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   -webkit-backdrop-filter:blur(var(--blur-md)) saturate(140%);
@@ -149,7 +168,10 @@ body::after{
 [data-theme="light"] .glass{
   background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.5));
 }
+
 :focus-visible{outline:2px solid var(--rose);outline-offset:2px;border-radius:4px}
+
+/* Buttons */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   padding:13px 22px;border-radius:var(--radius-pill);border:1px solid transparent;
@@ -165,6 +187,7 @@ body::after{
 .btn-ghost{background:transparent;border-color:var(--border);color:var(--text-2)}
 .btn-ghost:hover{border-color:var(--border-strong);color:var(--text)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none !important}
+
 .icon-btn{
   width:42px;height:42px;border-radius:var(--radius-sm);
   background:var(--surface-2);border:1px solid var(--border);
@@ -172,9 +195,14 @@ body::after{
   transition:transform var(--dur-fast) var(--ease-spring), border-color var(--dur) var(--ease);
 }
 .icon-btn:hover{border-color:var(--rose);transform:translateY(-2px)}
+
 .badge{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:var(--radius-pill);letter-spacing:.3px}
 .badge-rose{background:rgba(255,77,141,.16);color:var(--rose)}
 .badge-mint{background:rgba(52,231,181,.14);color:var(--mint)}
+
+/* =====================================================================
+   LANDING — NAV
+   ===================================================================== */
 .site-nav{
   position:sticky;top:14px;z-index:40;
   display:flex;align-items:center;justify-content:space-between;
@@ -194,7 +222,12 @@ body::after{
 .site-nav__links a{text-decoration:none;transition:color var(--dur-fast) var(--ease)}
 .site-nav__links a:hover{color:var(--text)}
 .site-nav__actions{display:flex;gap:10px;align-items:center}
+
 @media (max-width:760px){ .site-nav__links{display:none} }
+
+/* =====================================================================
+   HERO
+   ===================================================================== */
 .hero{padding:64px 0 80px}
 .hero__grid{
   display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
@@ -205,6 +238,7 @@ body::after{
   padding:7px 13px;border-radius:var(--radius-pill);border:1px solid var(--border);background:var(--surface);
 }
 .stat-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint)}
+
 .hero__title{
   font-family:var(--font-display);
   font-weight:500;
@@ -214,11 +248,15 @@ body::after{
   margin-bottom:20px;
 }
 .hero__title .grad{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
 .hero__sub{font-size:16.5px;line-height:1.65;color:var(--text-2);max-width:52ch;margin-bottom:30px}
 .hero__actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+
 .hero__meta{display:flex;gap:22px;flex-wrap:wrap}
 .hero__meta div{font-size:12px;color:var(--muted)}
 .hero__meta b{display:block;color:var(--text);font-size:19px;font-weight:700;font-family:var(--font-display)}
+
+/* --- Hero visual: glass orb + orbiting model nodes --- */
 .hero__visual{
   position:relative;aspect-ratio:1/1;max-width:460px;margin:0 auto;
   perspective:1000px;
@@ -243,6 +281,7 @@ body::after{
   box-shadow:0 0 0 10px rgba(255,77,141,.08), 0 20px 50px rgba(0,0,0,.5);
 }
 .orbit-core img{width:100%;height:100%;object-fit:cover}
+
 .orbit-ring{
   position:absolute;inset:0;
   animation:spin 26s linear infinite;
@@ -261,10 +300,13 @@ body::after{
   animation:spin-counter 26s linear infinite;
 }
 .orbit-ring.reverse .orbit-node__chip{animation-duration:34s}
+
 @keyframes spin{ to{ transform:rotate(360deg);} }
 @keyframes spin-counter{ to{ transform:translate(-50%,-50%) rotate(-360deg);} }
+
 .orbit-lines{position:absolute;inset:0;opacity:.45}
 .orbit-lines line{stroke:url(#lineGrad);stroke-width:1;stroke-dasharray:3 5}
+
 @media (max-width:980px){
   .hero__grid{grid-template-columns:1fr;text-align:center}
   .hero__sub{margin-inline:auto}
@@ -275,9 +317,17 @@ body::after{
 @media (max-width:420px){
   .hero__visual{--orbit-r:-112px}
 }
+
+/* =====================================================================
+   SECTION HEADS
+   ===================================================================== */
 .section-head{max-width:640px;margin:0 auto 40px;text-align:center}
 .section-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.3px;margin-bottom:10px}
 .section-head p{color:var(--text-2);font-size:15px}
+
+/* =====================================================================
+   MODEL GRID (landing)
+   ===================================================================== */
 .models{padding:20px 0 70px}
 .model-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;
@@ -302,6 +352,10 @@ body::after{
 .model-card__foot{display:flex;justify-content:space-between;align-items:center}
 .model-card__arrow{font-size:15px;color:var(--muted);transition:transform var(--dur) var(--ease)}
 .model-card:hover .model-card__arrow{transform:translateX(4px);color:var(--rose)}
+
+/* =====================================================================
+   EXTENDED MODELS STRIP
+   ===================================================================== */
 .extended{padding:10px 0 76px}
 .extended__scroller{
   display:flex;gap:10px;overflow-x:auto;padding:6px 4px 14px;scrollbar-width:thin;
@@ -314,9 +368,17 @@ body::after{
   text-decoration:none;
 }
 .chip:hover{border-color:var(--rose);transform:translateY(-2px)}
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
 .site-footer{padding:38px 0 50px;border-top:1px solid var(--border);margin-top:10px}
 .site-footer__inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted)}
 .site-footer__inner a{color:var(--rose);text-decoration:none;font-weight:600}
+
+/* =====================================================================
+   POPUP GATE
+   ===================================================================== */
 .popup-overlay{
   position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
   padding:20px;background:rgba(4,3,8,.66);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
@@ -348,7 +410,12 @@ body::after{
 .popup-panel__unlock{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;background:var(--surface-2);color:var(--text);font-weight:700;font-size:14px;transition:all var(--dur) var(--ease)}
 .popup-panel__note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.5}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* =====================================================================
+   CHAT SHELL
+   ===================================================================== */
 .chat-shell{display:flex;height:100vh;height:100dvh;overflow:hidden;background:var(--bg)}
+
 .chat-sidebar{
   width:296px;flex-shrink:0;display:flex;flex-direction:column;padding:20px;gap:18px;
   background:var(--surface-solid);border-right:1px solid var(--border);
@@ -360,14 +427,17 @@ body::after{
 .chat-sidebar__brand-text{line-height:1.15}
 .chat-sidebar__brand-name{font-weight:700;font-size:15px}
 .chat-sidebar__brand-owner{font-size:10px;color:var(--muted);letter-spacing:1px;font-weight:600}
+
 .sidebar-newchat{
   display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
   padding:11px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);
   background:var(--surface-2);font-weight:600;font-size:13.5px;transition:border-color var(--dur) var(--ease);
 }
 .sidebar-newchat:hover{border-color:var(--rose)}
+
 .sidebar-label{font-size:10.5px;color:var(--muted);letter-spacing:1px;font-weight:700;text-transform:uppercase;margin:4px 2px}
 .sidebar-models{display:flex;flex-direction:column;gap:6px}
+
 .model-item{
   display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);
   border:1px solid transparent;background:transparent;text-align:left;width:100%;
@@ -380,36 +450,7 @@ body::after{
 .model-item__name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .model-item__desc{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* =====================================================================
-   ONLY FIX — PREVENTS FLOWING OUTSIDE SCREEN
-   ===================================================================== */
-html, body{
-  max-width: 100vw !important;
-  overflow-x: clip !important;
-}
-.hero__sub,
-.section-head p,
-.model-card__desc,
-.extended__scroller,
-.chip{
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-  word-break: break-word !important;
-}
-/* The sidebar description that was flowing out — allow 2 lines wrap */
-.model-item__desc{
-  white-space: normal !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
-  line-height: 1.35 !important;
-}
-.model-item__body{
-  min-width: 0 !important;
-}
-/* Fix the long list "DeepSeek R1 Gemini Flash... Plus 16 more" on homepage */
-.hero, .container, .models, .extended{
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-   }
+.sidebar-explore{
+  display:flex;align-items:center;justify-content:space-between;width:100%;padding:11px 13px;
+  border-radius:var(--radius-sm);border:1px dashed var(--border-strong);background:transparent;
+  font-size:13px;font-weight:600;color:var(--te
